@@ -7,20 +7,24 @@ This repository hosts **unofficial, self-built Intel (x86_64) macOS binaries** o
 > individual from the official open-source repository. They are **not** official
 > DeepSeek-distributed binaries, and they are **not** official DeepSeek DMGs.
 
+> **非官方声明**：本仓库提供的是由第三方使用 DeepSeek 官方开源源码本地自编译的
+> Intel (x86_64) macOS 版本，**并非** DeepSeek 官方发布，也**不是**官方 DMG。
+
 ## Why this repository exists
 
 Upstream release artifacts are primarily aimed at Apple Silicon. Intel Mac users
-can build the desktop app from source themselves — this repository simply
-publishes the result so other Intel Mac users do not have to reproduce the
-toolchain.
+can build the desktop app from source themselves — this repository simply publishes
+the result so other Intel Mac users do not have to reproduce the toolchain.
 
 ## Releases
 
-See the [Releases](../../releases) page. Each release includes:
+See the [Releases](../../releases) page. Each release ships two equivalent packages:
 
-- `DeepSeek-Harness-<version>-mac-x64-unsigned.zip` — the `.app` bundle
-- a matching `.sha256` checksum file
-- release notes with full build provenance
+| Package | Use case |
+|---|---|
+| `DeepSeek-Harness-<version>-mac-x64-unsigned.dmg` | **Recommended.** Disk image — mount, drag the app into `Applications`. |
+| `DeepSeek-Harness-<version>-mac-x64-unsigned.zip` | Alternative — extract manually. |
+| `*.sha256` | Checksums for both packages. |
 
 ## Build characteristics
 
@@ -30,7 +34,7 @@ See the [Releases](../../releases) page. Each release includes:
 | Build method | Official source, locally self-compiled |
 | Signing | **Unsigned**, no Apple Developer signature |
 | Notarization | **Not notarized** by Apple |
-| Packaging | `.app` bundle in `.zip` (no source code included) |
+| Packaging | `.dmg` disk image and `.zip` archive (no source code included) |
 
 Because these builds are unsigned and unnotarized, macOS Gatekeeper blocks them on
 first launch. See the release notes for how to allow the app manually.
@@ -38,10 +42,11 @@ first launch. See the release notes for how to allow the app manually.
 ## Verifying a download
 
 ```bash
+shasum -a 256 DeepSeek-Harness-*.dmg
 shasum -a 256 DeepSeek-Harness-*.zip
 ```
 
-Compare the output against the `.sha256` file published with the release.
+Compare the output against the `.sha256` files published with the release.
 
 ## What is NOT included
 
